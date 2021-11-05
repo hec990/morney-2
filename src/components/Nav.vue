@@ -40,7 +40,7 @@ nav {
     }
   }
   > .item.selected {
-    color: #fcce0b;
+    color: #F57F17;
   }
 }
 </style>
