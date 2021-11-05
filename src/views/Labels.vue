@@ -1,6 +1,7 @@
 <template>
   <div>
     标签
+    <Nav />
   </div>
 </template>
 

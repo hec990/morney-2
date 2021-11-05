@@ -1,6 +1,7 @@
 <template>
   <div>
    记账
+    <Nav />
   </div>
 </template>
 
