@@ -1,6 +1,6 @@
 <template>
-  <div class="nav-wrapper">
-    <div class="content">
+  <div class="layout-wrapper" :class="classPrefix && `${classPrefix}-wrapper`">
+    <div class="content" :class="classPrefix && `${classPrefix}-content`">
      <!--  获取外面组件中 Layout包含的内容    -->
       <slot />
     </div>
@@ -10,12 +10,13 @@
 
 <script lang="ts">
 export default {
-  name: "Layout"
+  name: "Layout",
+  props: ['classPrefix'],
 };
 </script>
 
 <style lang="scss" scoped>
-.nav-wrapper {
+.layout-wrapper {
   border: 1px solid green;
   display: flex;
   flex-direction: column;
