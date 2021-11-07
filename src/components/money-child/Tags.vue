@@ -22,7 +22,7 @@ import {Component,Prop} from "vue-property-decorator";
 export default class Tags extends Vue{
  // string[] 是字符串数组，表示这个数组里只能存字符串
  // readonly 是只读的意思，因为dataSource是外部传来的，避免我们自己在子组件修改父组件的数据，如果子组件有修改数据的动作会提示这个数据是只读的，不能修改。
- @Prop() readonly dataSource: string[] | undefined;
+ @Prop(Boolean) readonly dataSource: string[] | undefined;
   // 选中的tag
   selectedTags: string[] = [];
 
