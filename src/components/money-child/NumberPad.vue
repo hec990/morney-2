@@ -1,29 +1,70 @@
 <template>
   <div class="numberPad">
-    <div class="output">100</div>
+    <div class="output">{{ output }}</div>
     <div class="buttons">
-      <button>1</button>
-      <button>2</button>
-      <button>3</button>
-      <button>删除</button>
-      <button>4</button>
-      <button>5</button>
-      <button>6</button>
-      <button>清空</button>
-      <button>7</button>
-      <button>8</button>
-      <button>9</button>
-      <button class="ok">OK</button>
-      <button class="zero">0</button>
+      <button @click="inputContent">1</button>
+      <button @click="inputContent">2</button>
+      <button @click="inputContent">3</button>
+      <button @click="remove">删除</button>
+      <button @click="inputContent">4</button>
+      <button @click="inputContent">5</button>
+      <button @click="inputContent">6</button>
+      <button @click="clear">清空</button>
+      <button @click="inputContent">7</button>
+      <button @click="inputContent">8</button>
+      <button @click="inputContent">9</button>
+      <button @click="ok" class="ok">OK</button>
+      <button @click="inputContent" class="zero">0</button>
       <button>.</button>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-export default {
-  name: "NumberPad"
-};
+import Vue from 'vue';
+import {Component} from 'vue-property-decorator';
+
+@Component
+export default class NumberPad extends Vue {
+  output = '0';
+
+  // 每个方法都有event，event中有点击当前事件的相关信息
+  inputContent(event:MouseEvent){
+    const button = (event.target as HTMLButtonElement);
+    const input = button.textContent;
+    // 1. 输入框不能超过16个数字
+    if (this.output.length === 16) { return; }
+    // 2. 如果当前第一个数字等于0
+    if (this.output === '0') {
+      if ('0123456789'.indexOf(input) >= 0) {
+        // 新值覆盖旧值
+        this.output = input;
+      } else {
+        // 新值增加
+        this.output += input;
+      }
+      return;
+    }
+    // 3. 输入框不能超过两个小数点以及第一个数字不能为小数点
+    if (this.output.indexOf('.') >= 0 && input === '.') {return;}
+    this.output += input;
+  }
+
+  remove(){
+    if(this.output.length === 1){
+      this.output = '0';
+    }else{
+      this.output = this.output.slice(0, -1);
+    }
+  }
+
+  clear(){
+    this.output = '0'
+  }
+
+  ok(){}
+
+}
 </script>
 
 <style lang="scss" scoped>
