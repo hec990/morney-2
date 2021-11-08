@@ -17,12 +17,16 @@ import NumberPad from "@/components/money-child/NumberPad.vue";
 import Vue from "vue";
 import {Component, Watch} from "vue-property-decorator";
 
+// 获取 localStorage 中 recordlist中的数据
+const recordList: Record[] = JSON.parse(window.localStorage.getItem('recordList') || '[]');
+
 // 声明类型
 type Record = {
   tags: string[]
   notes: string
   type: string
   amount: number
+  createdAt?: Date
 }
 
 @Component({
@@ -32,7 +36,7 @@ export default class Money extends Vue{
   tags = ['衣','食','住','行','玩']
 
   // 保存到local Storage 中的数组名称
-  recordList: Record[] = [];
+  recordList: Record[] = recordList;
 
   // 初始值
   record: Record = {
@@ -48,7 +52,8 @@ export default class Money extends Vue{
   saveRecord(){
     // 深拷贝
     // record2 是新的对象
-    const record2 = JSON.parse(JSON.stringify(this.record));
+    const record2: Record = JSON.parse(JSON.stringify(this.record));
+    record2.createdAt = new Date();
     this.recordList.push(record2);
   }
 
