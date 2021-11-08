@@ -1,3 +1,5 @@
+import RecordItem from "@/custom";
+
 const localStorageKeyName = 'recordList';
 const model = {
     // 克隆
