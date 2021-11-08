@@ -35,6 +35,10 @@ export default class Tags extends Vue{
     } else {
       this.selectedTags.push(tag);
     }
+    // $emit发送数据
+    // update:value 是自定义事件（外面拿数据需要监听这个事件）
+    // this.selectedTags 最新的数据
+    this.$emit('update:value', this.selectedTags)
   }
 
   create() {

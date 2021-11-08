@@ -13,11 +13,17 @@
 
 <script lang="ts">
 import Vue from "vue";
-import {Component} from "vue-property-decorator";
+import {Component, Watch} from "vue-property-decorator";
 
 @Component
 export default class Notes extends Vue{
   value='';
+
+  // 当value发生变化，就把最新的数据发送出去
+  @Watch('value')
+  onValueChanged(value: string) {
+    this.$emit('update:value', value);
+  }
 }
 
 </script>
