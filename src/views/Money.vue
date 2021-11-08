@@ -16,6 +16,7 @@ import Types from "@/components/money-child/Types.vue";
 import NumberPad from "@/components/money-child/NumberPad.vue";
 import Vue from "vue";
 import {Component, Watch} from "vue-property-decorator";
+import RecordItem from "@/custom";
 import model from '@/model'
 
 
