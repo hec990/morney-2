@@ -2,7 +2,9 @@
 <div>
   <Layout class-prefix="layout">
     <Tags :data-source.sync="tags" @update:value="onUpdateTags"/>
-    <Notes @update:value="onUpdateNotes"/>
+    <FormItem @update:value="onUpdateNotes"
+           field-name="备注"
+           placeholder="在这里输入备注"/>
     <Types :value.sync="record.type"/>
     <NumberPad :value.sync="record.amount" @submit="saveRecord"/>
   </Layout>
@@ -11,7 +13,7 @@
 
 <script lang="ts">
 import Tags from "@/components/money-child/Tags.vue";
-import Notes from "@/components/money-child/Notes.vue";
+import FormItem from "@/components/FormItem.vue";
 import Types from "@/components/money-child/Types.vue";
 import NumberPad from "@/components/money-child/NumberPad.vue";
 import Vue from "vue";
@@ -24,7 +26,7 @@ const recordList = recordListModel.fetch();
 const tagList = tagListModel.fetch();
 
 @Component({
-  components: {NumberPad, Types, Notes, Tags},
+  components: {NumberPad, Types, FormItem, Tags},
 })
 export default class Money extends Vue{
   tags = tagList;
