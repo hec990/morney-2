@@ -22,10 +22,8 @@ import Vue from "vue";
 import {Component, Watch} from "vue-property-decorator";
 import RecordItem from "@/custom";
 import recordListModel from '@/models/recordListModel'
-import tagListModel from "@/models/tagListModel";
 
 const recordList = recordListModel.fetch();
-const tagList = tagListModel.fetch();
 
 @Component({
   components: {NumberPad, Types, FormItem, Tags},
