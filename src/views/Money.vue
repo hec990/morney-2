@@ -19,20 +19,18 @@ import FormItem from "@/components/FormItem.vue";
 import Types from "@/components/money-child/Types.vue";
 import NumberPad from "@/components/money-child/NumberPad.vue";
 import Vue from "vue";
-import {Component, Watch} from "vue-property-decorator";
+import {Component} from "vue-property-decorator";
 import RecordItem from "@/custom";
-import recordListModel from '@/models/recordListModel'
-
-const recordList = recordListModel.fetch();
+import store from '@/store/index2.ts';
 
 @Component({
   components: {NumberPad, Types, FormItem, Tags},
 })
 export default class Money extends Vue{
-  tags = window.tagList;
+  tags = store.tagList;
 
   // 保存到local Storage 中的数组名称
-  recordList: RecordItem[] = recordList;
+  recordList = store.recordList;
 
   // 初始值
   record: RecordItem = {
@@ -46,17 +44,10 @@ export default class Money extends Vue{
     this.record.notes = value;
   }
   saveRecord(){
-    recordListModel.create(this.record);
-  }
-
-  // 当这个数组发生变化就将数据保存到local storage
-  @Watch('recordList')
-  onRecordListChange() {
-    recordListModel.save();
+    store.createRecord(this.record);
   }
 }
 </script>
-
 
 <style lang="scss">
 .layout-content {
