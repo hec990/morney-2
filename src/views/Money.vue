@@ -17,18 +17,17 @@ import NumberPad from "@/components/money-child/NumberPad.vue";
 import Vue from "vue";
 import {Component, Watch} from "vue-property-decorator";
 import RecordItem from "@/custom";
-import model from '@/model'
+import recordListModel from '@/models/recordListModel'
+import tagListModel from "@/models/tagListModel";
 
-
-// 获取 localStorage 中 recordlist中的数据
-const recordList = model.fetch()
-
+const recordList = recordListModel.fetch();
+const tagList = tagListModel.fetch();
 
 @Component({
   components: {NumberPad, Types, Notes, Tags},
 })
 export default class Money extends Vue{
-  tags = ['衣','食','住','行','玩']
+  tags = tagList;
 
   // 保存到local Storage 中的数组名称
   recordList: RecordItem[] = recordList;
@@ -47,7 +46,7 @@ export default class Money extends Vue{
   saveRecord(){
     // 深拷贝
     // record2 是新的对象
-    const record2: RecordItem = model.clone(this.record);
+    const record2: RecordItem = recordListModel.clone(this.record);
     record2.createdAt = new Date();
     this.recordList.push(record2);
   }
@@ -55,7 +54,7 @@ export default class Money extends Vue{
   // 当这个数组发生变化就将数据保存到local storage
   @Watch('recordList')
   onRecordListChange() {
-    model.save(this.recordList);
+    recordListModel.save(this.recordList);
   }
 }
 </script>
