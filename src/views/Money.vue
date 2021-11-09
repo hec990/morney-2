@@ -48,17 +48,13 @@ export default class Money extends Vue{
     this.record.notes = value;
   }
   saveRecord(){
-    // 深拷贝
-    // record2 是新的对象
-    const record2: RecordItem = recordListModel.clone(this.record);
-    record2.createdAt = new Date();
-    this.recordList.push(record2);
+    recordListModel.create(this.record);
   }
 
   // 当这个数组发生变化就将数据保存到local storage
   @Watch('recordList')
   onRecordListChange() {
-    recordListModel.save(this.recordList);
+    recordListModel.save();
   }
 }
 </script>
