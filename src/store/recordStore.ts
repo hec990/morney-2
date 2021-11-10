@@ -1,4 +1,3 @@
-import RecordItem from '@/custom';
 import recordListModel from '@/models/recordListModel';
 
 export default  {

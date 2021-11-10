@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import clone from '@/lib/clone';
-import RecordItem from "@/custom";
 Vue.use(Vuex)
 
 export default new Vuex.Store({

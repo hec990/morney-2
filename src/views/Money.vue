@@ -20,7 +20,14 @@ import Types from "@/components/money-child/Types.vue";
 import NumberPad from "@/components/money-child/NumberPad.vue";
 import Vue from "vue";
 import {Component} from "vue-property-decorator";
-import RecordItem from "@/custom";
+
+type RecordItem = {
+  tags: string[]
+  notes: string
+  type: string
+  amount: number
+  createdAt?: Date
+}
 
 @Component({
   components: {NumberPad, Types, FormItem, Tags},
