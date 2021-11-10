@@ -15,7 +15,7 @@
       <button @click="inputContent">9</button>
       <button @click="ok" class="ok">OK</button>
       <button @click="inputContent" class="zero">0</button>
-      <button>.</button>
+      <button @click="inputContent">.</button>
     </div>
   </div>
 </template>
@@ -32,7 +32,7 @@ export default class NumberPad extends Vue {
   // 每个方法都有event，event中有点击当前事件的相关信息
   inputContent(event:MouseEvent){
     const button = (event.target as HTMLButtonElement);
-    const input = button.textContent;
+    const input = button.textContent!;
     // 1. 输入框不能超过16个数字
     if (this.output.length === 16) { return; }
     // 2. 如果当前第一个数字等于0
