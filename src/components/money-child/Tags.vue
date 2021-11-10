@@ -4,7 +4,7 @@
       <button @click="create">新增标签</button>
     </div>
     <ul class="current">
-      <li v-for="tag in dataSource"
+      <li v-for="tag in tagList"
           :key="tag.id"
           :class="{selected: selectedTags.indexOf(tag)>=0}"
           @click="toggle(tag)"
@@ -16,13 +16,12 @@
 
 <script lang="ts">
 import Vue from "vue";
-import {Component,Prop} from "vue-property-decorator";
+import {Component} from "vue-property-decorator";
+import store from "@/store/index2";
 
 @Component
 export default class Tags extends Vue{
- // string[] 是字符串数组，表示这个数组里只能存字符串
- // readonly 是只读的意思，因为dataSource是外部传来的，避免我们自己在子组件修改父组件的数据，如果子组件有修改数据的动作会提示这个数据是只读的，不能修改。
- @Prop() readonly dataSource: string[] | undefined;
+  tagList = store.fetchTags();
   // 选中的tag
   selectedTags: string[] = [];
 
@@ -43,12 +42,10 @@ export default class Tags extends Vue{
 
   create() {
     const name = window.prompt("请输入标签名");
-    if (name === "") {
-      window.alert("标签名不能为空");
-    } else if (this.dataSource) {
-      // 将最新的数据发送给外面
-      this.$emit("update:dataSource",[...this.dataSource, name]);
+    if (!name) {
+      return window.alert('标签名不能为空');
     }
+    store.createTag(name);
   }
 }
 </script>
