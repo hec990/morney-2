@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 import clone from '@/lib/clone';
 Vue.use(Vuex)
 
-export default new Vuex.Store({
+const store = new Vuex.Store({
   state: {
     recordList: [] as RecordItem[]
   },
@@ -15,11 +15,10 @@ export default new Vuex.Store({
       const record2: RecordItem = clone(record);
       record2.createdAt = new Date();
       state.recordList.push(record2);
-      // store.commit('saveRecords')
+      store.commit('saveRecords')
     },
     saveRecords(state) {
-      window.localStorage.setItem('recordList',
-          JSON.stringify(state.recordList));
+      window.localStorage.setItem('recordList',JSON.stringify(state.recordList));
     },
   },
   actions: {
@@ -27,3 +26,5 @@ export default new Vuex.Store({
   modules: {
   }
 })
+
+export default store
