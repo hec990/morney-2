@@ -24,7 +24,6 @@ import Vue from "vue";
 import {Component} from "vue-property-decorator";
 import FormItem from "@/components/FormItem.vue";
 import Button from "@/components/Button.vue";
-import store from '@/store/index2'
 
 @Component({
   components: {Button, FormItem}
@@ -36,25 +35,28 @@ export default class EditLabel extends Vue {
 
   created() {
     const id = this.$route.params.id;
+    console.log(id);
+    this.$store.commit('fetchTags');
     this.$store.commit('setCurrentTag', id);
     if (!this.tag) {
+      console.log('no tag');
       this.$router.replace('/404');
+    } else {
+      console.log('has tag');
     }
   }
 
   update(name: string) {
     if (this.tag) {
-      store.updateTag(this.tag.id, name);
+      this.$store.commit('updateTag', {
+        id: this.tag.id, name
+      });
     }
   }
 
-  remove(){
+  remove() {
     if (this.tag) {
-      if (store.removeTag(this.tag.id)) {
-        this.$router.go(-1);
-      } else {
-        window.alert('删除失败');
-      }
+      this.$store.commit('removeTag', this.tag.id);
     }
   }
 
