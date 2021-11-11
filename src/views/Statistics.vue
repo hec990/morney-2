@@ -25,7 +25,7 @@ export default class Statistics extends Vue {
   type = '-';
   interval = 'day';
   intervalList = intervalList;
-  recordTypeList = recordTypeList
+  recordTypeList = recordTypeList;
 }
 </script>
 
@@ -38,5 +38,8 @@ export default class Statistics extends Vue {
       display: none;
     }
   }
+}
+::v-deep .interval-tabs-item {
+  height: 48px;
 }
 </style>
