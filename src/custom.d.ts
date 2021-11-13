@@ -1,11 +1,23 @@
 // 全局声明类型
 type RecordItem = {
-    tags: string[]
+    tags: Tag[]
     notes: string
     type: string
     amount: number
-    createdAt?: Date
+    createdAt?: string
 }
+
+type Tag = {
+    id: string;
+    name: string;
+}
+
+type RootState = {
+    recordList: RecordItem[],
+    tagList: Tag[],
+    currentTag?: Tag
+}
+
 type TagListModel = {
     data: Tag[]
     fetch: () => Tag[]
@@ -15,7 +27,3 @@ type TagListModel = {
     save: () => void
 }
 
-type Tag = {
-    id: string;
-    name: string;
-}
