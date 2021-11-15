@@ -1,7 +1,7 @@
 <template>
 <div>
   <Layout class-prefix="layout">
-    <Tags />
+    <Tags @update:value="record.tags = $event"/>
     <div class="notes">
       <FormItem @update:value="onUpdateNotes"
                 field-name="备注"
