@@ -5,7 +5,9 @@
     <div class="notes">
       <FormItem @update:value="onUpdateNotes"
                 field-name="备注"
-                placeholder="在这里输入备注"/>
+                placeholder="在这里输入备注"
+                :value.sync="record.notes"
+      />
     </div>
     <Tabs :data-source="recordTypeList" :value.sync="record.type"/>
     <NumberPad :value.sync="record.amount" @submit="saveRecord"/>
@@ -48,15 +50,15 @@ export default class Money extends Vue{
     this.$store.commit('fetchRecords')
   }
 
-  onUpdateNotes(value: string) {
-    this.record.notes = value;
-  }
-
   saveRecord(){
-    if(this.record.tags || this.record.tags.length ===0){
+    if(!this.record.tags || this.record.tags.length ===0){
       return window.alert("请至少一个标签")
     }
     this.$store.commit('createRecord', this.record);
+    if (this.$store.state.createRecordError === null) {
+      window.alert('已保存');
+      this.record.notes = '';
+    }
   }
 }
 </script>
